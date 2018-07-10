@@ -4,10 +4,10 @@ const retrieveAll = function(callback){
   var queryString = 'SELECT * from general_information';
   connection.query(queryString, (err, results) =>{
     if(err){
-      console.log('problem with db query trying to retrieve all data');
+      callback(err);
       return;
     }
-    callback(results);
+    callback(null,results);
   })
 }
 
@@ -15,10 +15,10 @@ const retrieveSpecific = function (firstName, lastName, callback){
   var queryString = 'SELECT * from general_information WHERE firstName=? AND lastName=?';
   connection.query(queryString, [firstName, lastName] ,(err, results) =>{
     if(err){
-      console.log('problem with db query trying to retrieve specific data');
+      callback(err);
       return;
     }
-    callback(results);
+    callback(null,results);
   })
 }
 
@@ -28,9 +28,11 @@ const add = function (firstName, lastName, county, city, role, sales, callback){
   VALUES (?, ?, ?, ?, ?, ?)';
   connection.query(queryString, [firstName, lastName, county, city, role, sales], (err, results) =>{
     if(err){
-      console.log('problem with db query trying to add new data');
+      callback(err);
       return;
     }
-    callback(results);
+    callback(null,results);
   })
 }
+
+module.exports = dataBaseFunctions;
