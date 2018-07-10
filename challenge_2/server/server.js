@@ -40,25 +40,27 @@ app.post('/report', function(req, res){
   })
   var results = [];
 
-  var helperFunction = function(node){
-    if(!node.children){
-      return;
-    }else{
-      for(var i = 0; i<node.children.length; i++){
-          results.push(node.children[i]);
-          helperFunction(node.children[i]);
-        }
-    }
-  }
-  helperFunction(req.body);
-  //process the results
-  for(var i = 0; i<results.length; i++){
-    information.add(results[i].firstName, results[i].lastName, results[i].county, results[i].city, results[i].role, results[i].sales, (err, results) => {
-      if(err){
-        return res.status(400).send(err);//something wrong with the server
+  if(req.body.children.length !==0){
+    var helperFunction = function(node){
+      if(!node.children){
+        return;
+      }else{
+        for(var i = 0; i<node.children.length; i++){
+            results.push(node.children[i]);
+            helperFunction(node.children[i]);
+          }
       }
-      res.status(201).send();
-    })
+    }
+    helperFunction(req.body);
+    //process the results
+    for(var i = 0; i<results.length; i++){
+      information.add(results[i].firstName, results[i].lastName, results[i].county, results[i].city, results[i].role, results[i].sales, (err, results) => {
+        if(err){
+          return res.status(400).send(err);//something wrong with the server
+        }
+        res.status(201).send();
+      })
+    }
   }
 })
 

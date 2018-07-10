@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   addInfo(info){//pending
-    axios.post('/report').then(function(res){console.log(res)}).catch(function(err){console.log(err)});
+    axios.post('/report', info).then((response) => {console.log(response)}).catch(err => console.log(err,'error posting info'));
   }
 
   render(){
@@ -29,7 +29,7 @@ class App extends React.Component {
           <textarea id="msg" name="user_message"></textarea>
           <button onClick = {() => {
             var JsonData = document.getElementById('msg').value
-            addInfo(JsonData);}}> Post data</button>
+            getAllInfo();}}> Post data</button>
         </div>
       </form>
     )
