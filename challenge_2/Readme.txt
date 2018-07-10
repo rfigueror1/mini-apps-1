@@ -27,3 +27,5 @@ Read Me
   4.4 POST - Send the data in the body, but collecting the pieces (parse the Body)
   4.5 Use the methods wrote in the database to service requests
   4.6 connect the server to specific port
+
+5. Client
