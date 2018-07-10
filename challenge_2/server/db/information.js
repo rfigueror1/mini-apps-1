@@ -34,3 +34,5 @@ const add = function (firstName, lastName, county, city, role, sales, callback){
     callback(null,results);
   })
 }
+ //probado que si funciona
+ module.exports = {retrieveAll, add,};

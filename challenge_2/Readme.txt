@@ -29,3 +29,5 @@ Read Me
   4.6 connect the server to specific port
 
 5. Client
+  5.1 Render the basic thing.
+  5.2 API using Axios

@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/report', function(req, res){
-  db.retrieveAll((err, results) => {
+  information.retrieveAll((err, results) => {
     if(err){
       return res.status(500).send(err);//something wrong with the server
     }
@@ -32,7 +32,7 @@ app.post('/report', function(req, res){
   var city = req.body.city;
   var role = req.body.role;
   var sales = req.body.sales;
-  db.add(firstName, lastName, county, city, role, sales, (err, results) => {
+  information.add(firstName, lastName, county, city, role, sales, (err, results) => {
     if(err){
       return res.status(400).send(err);//something wrong with the server
     }
@@ -53,7 +53,7 @@ app.post('/report', function(req, res){
   helperFunction(req.body);
   //process the results
   for(var i = 0; i<results.length; i++){
-    db.add(results[i].firstName, results[i].lastName, results[i].county, results[i].city, results[i].role, results[i].sales, (err, results) => {
+    information.add(results[i].firstName, results[i].lastName, results[i].county, results[i].city, results[i].role, results[i].sales, (err, results) => {
       if(err){
         return res.status(400).send(err);//something wrong with the server
       }
@@ -62,5 +62,6 @@ app.post('/report', function(req, res){
   }
 })
 
+app.use(express.static(path.join(__dirname, '../client/dist')));
 app.listen(3000, ()=> {console.log('listening in port 3000')});
 //
