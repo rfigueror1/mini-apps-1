@@ -34,5 +34,3 @@ const add = function (firstName, lastName, county, city, role, sales, callback){
     callback(null,results);
   })
 }
-
-module.exports = dataBaseFunctions;
