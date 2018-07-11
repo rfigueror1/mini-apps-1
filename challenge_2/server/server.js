@@ -4,6 +4,7 @@ var express =     require('express');
 var path =        require('path')
 var bodyParser =  require('body-parser');
 var app =         express();
+var fs =          require('fs');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -40,6 +41,14 @@ app.post('/report', function(req, res){
     }
     res.status(201).send();
   })
+
+  var stringData = JSON.stringify(data);
+
+  fs.writeFile('../client/dist/distFile.csv', stringData, (err) => {
+    if (err) throw err;
+      console.log('The file has been saved!');
+    });
+
   console.log(req.body.user_message, 'here at server');
 
   var results = [];
@@ -58,7 +67,10 @@ app.post('/report', function(req, res){
     helperFunction(data);
     //process the results
     for(var i = 0; i<results.length; i++){
-      information.add(results[i].firstName, results[i].lastName, results[i].county, results[i].city, results[i].role, results[i].sales, (err, results) => {
+      information.add(results[i].firstName, results[i].lastName,
+        results[i].county, results[i].city,
+        results[i].role, results[i].sales,
+        (err, results) => {
         if(err){
           return res.status(400).send(err);//something wrong with the server
         }
