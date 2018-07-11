@@ -41,6 +41,32 @@ app.post('/report', function(req, res){
     res.status(201).send();
   })
   console.log(req.body.user_message, 'here at server');
+
+  var results = [];
+
+  if(data.children.length !==0){
+    var helperFunction = function(node){
+      if(!node.children){
+        return;
+      }else{
+        for(var i = 0; i<node.children.length; i++){
+            results.push(node.children[i]);
+            helperFunction(node.children[i]);
+          }
+      }
+    }
+    helperFunction(data);
+    //process the results
+    for(var i = 0; i<results.length; i++){
+      information.add(results[i].firstName, results[i].lastName, results[i].county, results[i].city, results[i].role, results[i].sales, (err, results) => {
+        if(err){
+          return res.status(400).send(err);//something wrong with the server
+        }
+        res.status(201).send();
+      })
+    }
+  }
+
 })
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
