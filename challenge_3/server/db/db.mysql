@@ -1,19 +1,60 @@
-
-
 DROP DATABASE IF EXISTS costumer_information;
 
 CREATE DATABASE IF NOT EXISTS costumer_information;
 
 USE costumer_information;
 
-CREATE TABLE costumers (id INT NOT NULL AUTO_INCREMENT,\
-name VARCHAR(100), email VARCHAR(100), password VARCHAR(100), address VARCHAR(100),\
-city VARCHAR(100), state VARCHAR(100),  zip_code INT, phone INT, card INT,\
-expiry DATE, cvv INT, zip_billing INT, PRIMARY KEY(id));
+CREATE TABLE costumers_f1 (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    password VARCHAR(100),
+    PRIMARY KEY(id)
+    );
 
-INSERT INTO costumers (name, email, password, address, city, state, zip_code, phone, card, expiry, cvv,  zip_billing)\
-VALUES ('Ricardo Figueroa' , 'rfigueror@gmail.com',\
-'hello123', 'Positano Circle 156', 'Redwood City', 'California', 14210, 5528, 34553453,\
- '1000-01-01', 5555, 14210);
+CREATE TABLE costumers_f2 (
+    no INT NOT NULL AUTO_INCREMENT,
+    address VARCHAR(100) NOT NULL,
+    city VARCHAR(100),
+    state VARCHAR(100),
+    zip_code INT,
+    phone INT,
+    id INT,
+    PRIMARY KEY(no),
+    FOREIGN KEY (id)
+      REFERENCES costumers_f1(id)
+      ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
-SELECT * FROM costumers;
+CREATE TABLE costumers_f3 (
+    no INT NOT NULL AUTO_INCREMENT,
+    card INT,
+    expiry DATE,
+    cvv INT,
+    zip_billing INT,
+    id INT NOT NULL,
+    PRIMARY KEY(no),
+    FOREIGN KEY (id)
+      REFERENCES costumers_f1(id)
+      ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+INSERT INTO costumers_f1 (
+  name, email, password)
+  VALUES ('Ricardo Figueroa' ,
+    'rfigueror@gmail.com',
+    'hello123');
+
+INSERT INTO costumers_f2 (address, city, state, zip_code, phone, id)
+  VALUES ('Positano Circle 156', 'Redwood City',
+    'California', 14210, 5528,
+        (SELECT id FROM costumers_f1 WHERE email = 'rfigueror@gmail.com'));
+
+INSERT INTO costumers_f3 (card, expiry, cvv, zip_billing, id)
+  VALUES (556674, '1000-01-01', 7873, 14210,
+      (SELECT id FROM costumers_f1 WHERE email = 'rfigueror@gmail.com'));
+
+
+SELECT * FROM costumers_f1;
+SELECT * FROM costumers_f2;
+SELECT * FROM costumers_f3;
