@@ -15,7 +15,13 @@ class App extends React.Component {
   }
 
   getAllInfo(){
-    axios.get('/report').then((results) => {console.log(results.data); this.setState({information:results.data})}).catch(err => console.log(err,'error fetching information'));
+    axios.get('/report')
+      .then((results) => {
+        console.log(results.data);
+        this.setState({
+          information:results.data})
+        })
+      .catch(err => console.log(err,'error fetching information'));
   }
 
   addInfo(info){//pending
@@ -31,7 +37,17 @@ class App extends React.Component {
   }
 
   render(){
+
+    var indents = [];
+    var info = this.state.information;
+    for (var i = 0; i <this.state.information; i++) {
+      indents.push(<span className='indent' key={i}>{i}</span>);
+    }
+
+    console.log(indents);
+
     return(
+      <div>
       <form action="/report" method="post">
         <div>
           <input id="msg" name="user_message"/>
@@ -42,6 +58,9 @@ class App extends React.Component {
             this.addInfo(JsonData);}}> Post data</button>
         </div>
       </form>
+      <div>
+      </div>
+    </div>
     )
   }
 }
