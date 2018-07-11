@@ -6,6 +6,7 @@ var bodyParser =  require('body-parser');
 var app =         express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 //serve static files
 //app.use(express.static(__dirname + '/public'));
@@ -26,42 +27,20 @@ app.get('/report', function(req, res){
 })
 
 app.post('/report', function(req, res){
-  var firstName = req.body.firstName;
-  var lastName = req.body.lastName;
-  var county = req.body.county;
-  var city = req.body.city;
-  var role = req.body.role;
-  var sales = req.body.sales;
+  var data = JSON.parse(req.body.user_message);
+  var firstName = data.firstName;//aqui
+  var lastName = data.lastName;
+  var county = data.county;
+  var city = data.city;
+  var role = data.role;
+  var sales = data.sales;
   information.add(firstName, lastName, county, city, role, sales, (err, results) => {
     if(err){
       return res.status(400).send(err);//something wrong with the server
     }
     res.status(201).send();
   })
-  var results = [];
-
-  if(req.body.children.length !==0){
-    var helperFunction = function(node){
-      if(!node.children){
-        return;
-      }else{
-        for(var i = 0; i<node.children.length; i++){
-            results.push(node.children[i]);
-            helperFunction(node.children[i]);
-          }
-      }
-    }
-    helperFunction(req.body);
-    //process the results
-    for(var i = 0; i<results.length; i++){
-      information.add(results[i].firstName, results[i].lastName, results[i].county, results[i].city, results[i].role, results[i].sales, (err, results) => {
-        if(err){
-          return res.status(400).send(err);//something wrong with the server
-        }
-        res.status(201).send();
-      })
-    }
-  }
+  console.log(req.body.user_message, 'here at server');
 })
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
