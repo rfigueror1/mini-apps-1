@@ -38,13 +38,12 @@ class App extends React.Component {
 
   render(){
 
-    var indents = [];
-    var info = this.state.information;
-    for (var i = 0; i <this.state.information; i++) {
-      indents.push(<span className='indent' key={i}>{i}</span>);
-    }
-
-    console.log(indents);
+    const infos = this.state.information.map(i =>
+    <div key={i.id} className="info">
+      {i.firstName}, {i.lastName}, {i.county},
+       {i.city}, {i.roles}, {i.sales}
+    </div>
+    );
 
     return(
       <div>
@@ -59,6 +58,7 @@ class App extends React.Component {
         </div>
       </form>
       <div>
+        {infos}
       </div>
     </div>
     )
