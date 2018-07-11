@@ -1,0 +1,19 @@
+
+
+DROP DATABASE IF EXISTS costumer_information;
+
+CREATE DATABASE IF NOT EXISTS costumer_information;
+
+USE costumer_information;
+
+CREATE TABLE costumers (id INT NOT NULL AUTO_INCREMENT,\
+name VARCHAR(100), email VARCHAR(100), password VARCHAR(100), address VARCHAR(100),\
+city VARCHAR(100), state VARCHAR(100),  zip_code INT, phone INT, card INT,\
+expiry DATE, cvv INT, zip_billing INT, PRIMARY KEY(id));
+
+INSERT INTO costumers (name, email, password, address, city, state, zip_code, phone, card, expiry, cvv,  zip_billing)\
+VALUES ('Ricardo Figueroa' , 'rfigueror@gmail.com',\
+'hello123', 'Positano Circle 156', 'Redwood City', 'California', 14210, 5528, 34553453,\
+ '1000-01-01', 5555, 14210);
+
+SELECT * FROM costumers;
