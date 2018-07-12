@@ -9,7 +9,6 @@ const port = 3000;
 
 //serve static files in directory
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/info', function(req, res){
   //check for errors
@@ -24,6 +23,7 @@ app.get('/info', function(req, res){
 });
 
 app.post('/info', function (req, res) {
+  console.log(req);
   var data = req.body;
   var kind = req.body.form;
   if(kind === "1"){
@@ -31,7 +31,7 @@ app.post('/info', function (req, res) {
     var email = data.email;
     var password = data.password;
 
-    fs.writeFile('./../client/mail.txt', email+'', (err) => {
+    fs.writeFile('./mail.txt', email+'', (err) => {
       if (err) throw err;
       console.log('mail has been saved!');
     });
@@ -91,7 +91,7 @@ app.post('/info', function (req, res) {
   }
 });
 
-app.use(express.static(__dirname + 'public'));
+app.use(express.static('./../public'));
 
 app.listen(3000, function () {
   console.log('Server Ready');
