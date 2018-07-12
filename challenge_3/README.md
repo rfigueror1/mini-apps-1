@@ -6,4 +6,12 @@
 
 2. Make database functions.
   2.1 establish connection with Database
-  2.2 
+  2.2 make database functions.
+
+3. Make server
+  3.1 serve static files
+  3.2 define ports
+  3.3 parse body
+  3.4 middleware
+  3.5 path
+  
