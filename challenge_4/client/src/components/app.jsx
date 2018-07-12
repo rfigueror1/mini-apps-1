@@ -1,4 +1,4 @@
-var react = require('react');
+var React = require('react');
 var reactdom = require('react-dom');
 
 class App extends React.Component {
