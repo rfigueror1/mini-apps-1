@@ -4,7 +4,8 @@
   "description": "1. Database   1.1 Create Database.   1.2 Create database tables.   1.3 Use database.   1.4 test database.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel client --out-dir public --presets=env,react --watch --source-maps inline"
   },
   "author": "",
   "license": "ISC",

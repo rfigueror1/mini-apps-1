@@ -14,4 +14,9 @@
   3.3 parse body
   3.4 middleware
   3.5 path
+
+4. Work with client
+  4.1 install React.
+  4.2 Install Babel-cli
+  4.3 install nodedemon
   
