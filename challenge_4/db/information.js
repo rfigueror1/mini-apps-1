@@ -23,20 +23,4 @@ const makeMove = function(x, y, player, callback){
   })
 }
 
-makeMove(3,3,2, (err, results) => {
-  if(err){
-    console.log(err);
-    return;
-  }
-  console.log(results);
-})
-
-retrieveAllPlays((err, results) => {
-  if(err){
-    console.log(err);
-    return;
-  }
-  console.log(results);
-})
-
 module.exports = {retrieveAllPlays, makeMove};

@@ -6,6 +6,4 @@ USE game;
 
 CREATE TABLE table_moves (id INT NOT NULL AUTO_INCREMENT, x INT NOT NULL, y INT NOT NULL, player INT NOT NULL, PRIMARY KEY(id));
 
-INSERT INTO table_moves (x, y, player) VALUES(3,2,1);
-
 SELECT * FROM table_moves;
