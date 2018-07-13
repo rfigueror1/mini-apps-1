@@ -69,6 +69,21 @@ class App extends React.Component {
     });
   }
 
+  //PENDING FINDING SOLUTION OF GAME
+  checkGame(){
+    var results = this.state.gameState;
+    var horizontal_results = 0;
+    var r1 = [];
+    var keys = Object.keys(this.state.gameState);
+    var r0Keys = keys.slice(0,6);
+    var r1Keys = keys.slice(8,13);
+    var r2Keys = keys.slice(14,20);
+    var r3Keys = keys.slice(21,27);
+    var r4Keys = keys.slice(28,34);
+    var r5Keys = keys.slice(35,41);
+    var r6Keys = keys.slice(42,48);
+  }
+
 
   render() {
     return (
